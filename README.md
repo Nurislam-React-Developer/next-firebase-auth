@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AuthProject — Современная аутентификация на Next.js + Firebase
 
-## Getting Started
+**AuthProject** — это современное приложение для аутентификации с поддержкой регистрации, входа через email и Google, защищёнными страницами, профилем пользователя и стильным интерфейсом.
 
-First, run the development server:
+## Возможности
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Регистрация и вход по email/паролю
+- Вход через Google
+- Защищённые роуты (только для авторизованных)
+- Современный UI/UX (Tailwind, анимации, toast)
+- Профиль пользователя: аватар, имя, email, UID, дата регистрации
+- Редактирование профиля (имя, аватар)
+- Красивая страница 404
+- Безопасное хранение токенов (cookie)
+
+## Быстрый старт
+
+1. **Склонируйте репозиторий:**
+   ```bash
+   git clone https://github.com/your-username/auth-project.git
+   cd auth-project
+   ```
+2. **Установите зависимости:**
+   ```bash
+   npm install
+   # или
+   yarn install
+   ```
+3. **Создайте .env файл:**
+   Скопируйте `.env.example` в `.env` и заполните своими данными Firebase:
+   ```bash
+   cp .env.example .env
+   # затем отредактируйте .env
+   ```
+4. **Запустите проект:**
+   ```bash
+   npm run dev
+   # или
+   yarn dev
+   ```
+5. Откройте [http://localhost:3000](http://localhost:3000)
+
+## Настройка переменных окружения
+
+В файле `.env` должны быть такие переменные:
+
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Развёртывание
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Рекомендуется деплоить на [Vercel](https://vercel.com/) или [Netlify](https://www.netlify.com/). Просто импортируйте репозиторий и настройте переменные окружения.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Как назвать проект на GitHub?
 
-## Learn More
+- **auth-project**
+- **next-firebase-auth**
+- **modern-auth-app**
+- **auth-portal**
+- **nextjs-auth-starter**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Автор:** Nurislam Abdimalicov
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Если понравился проект — ставь ⭐️ и делай fork!

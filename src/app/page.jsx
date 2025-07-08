@@ -1,103 +1,119 @@
-import Image from "next/image";
+import { cookies } from 'next/headers';
+import {
+	FaGoogle,
+	FaLock,
+	FaRocket,
+	FaSignOutAlt,
+	FaUserCircle,
+	FaUserEdit,
+} from 'react-icons/fa';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function HomePage() {
+	const token = cookies().get('token')?.value;
+	const name = cookies().get('name')?.value;
+	const email = cookies().get('email')?.value;
+	const avatar = cookies().get('avatar')?.value;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	if (token) {
+		return (
+			<div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-blue-100 to-green-200'>
+				<div className='bg-white p-10 rounded-2xl shadow-2xl text-center max-w-2xl w-full animate-fade-in'>
+					<div className='flex flex-col items-center mb-6'>
+						<img
+							src={avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=1'}
+							alt='avatar'
+							className='w-24 h-24 rounded-full border-4 border-blue-300 object-cover mb-2 shadow-lg'
+						/>
+						<h1 className='text-3xl font-extrabold mb-2 text-blue-700'>
+							Привет, {name || email || 'пользователь'}!
+						</h1>
+						<p className='text-gray-600 mb-4'>
+							Добро пожаловать в AuthProject — твой личный кабинет.
+						</p>
+					</div>
+					<div className='flex flex-col sm:flex-row gap-4 justify-center mb-6'>
+						<a
+							href='/profile'
+							className='bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2'
+						>
+							<FaUserEdit /> Редактировать профиль
+						</a>
+						<form action='/logout' method='POST'>
+							<button
+								type='submit'
+								className='bg-red-600 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2'
+							>
+								<FaSignOutAlt /> Выйти
+							</button>
+						</form>
+					</div>
+					<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 text-gray-600'>
+						<div className='flex flex-col items-center'>
+							<FaLock className='text-3xl text-blue-400 mb-2' />
+							<span>Твои данные защищены</span>
+						</div>
+						<div className='flex flex-col items-center'>
+							<FaRocket className='text-3xl text-green-400 mb-2' />
+							<span>Быстрый доступ к возможностям</span>
+						</div>
+					</div>
+					<div className='mt-8 text-gray-400 text-sm'>
+						<span>
+							© {new Date().getFullYear()} AuthProject. Все права защищены.
+						</span>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	// Не авторизован — hero-блок
+	return (
+		<div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-blue-100 to-green-200'>
+			<div className='bg-white p-10 rounded-2xl shadow-2xl text-center max-w-2xl w-full animate-fade-in'>
+				<h1 className='text-4xl font-extrabold mb-4 text-blue-700 flex items-center justify-center gap-2'>
+					<FaRocket className='text-green-500' /> Добро пожаловать в{' '}
+					<span className='text-green-600'>AuthProject</span>!
+				</h1>
+				<p className='text-lg text-gray-700 mb-6'>
+					Современное приложение для аутентификации: регистрация, вход через
+					email и Google, защищённые страницы, профиль пользователя и стильный
+					интерфейс.
+				</p>
+				<div className='flex flex-col sm:flex-row gap-4 justify-center mb-6'>
+					<a
+						href='/register'
+						className='bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2'
+					>
+						<FaLock /> Зарегистрироваться
+					</a>
+					<a
+						href='/login'
+						className='bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2'
+					>
+						<FaGoogle /> Войти
+					</a>
+				</div>
+				<div className='grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 text-gray-600'>
+					<div className='flex flex-col items-center'>
+						<FaLock className='text-3xl text-blue-400 mb-2' />
+						<span>Безопасная аутентификация</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<FaGoogle className='text-3xl text-green-400 mb-2' />
+						<span>Вход через Google</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<FaUserCircle className='text-3xl text-blue-600 mb-2' />
+						<span>Профиль пользователя</span>
+					</div>
+				</div>
+				<div className='mt-8 text-gray-400 text-sm'>
+					<span>
+						© {new Date().getFullYear()} AuthProject. Все права защищены.
+					</span>
+				</div>
+			</div>
+		</div>
+	);
 }
