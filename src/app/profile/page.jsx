@@ -41,7 +41,7 @@ export default function ProfilePage() {
 
 	const validate = () => {
 		const newErrors = {};
-		if (!name) newErrors.name = 'Введите имя';
+		if (!name) newErrors.name = 'Пожалуйста, введите имя';
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
 	};
@@ -51,7 +51,7 @@ export default function ProfilePage() {
 		if (!validate()) return;
 		Cookies.set('name', name, { expires: 7 });
 		Cookies.set('avatar', avatar, { expires: 7 });
-		toast.success('Профиль обновлён!');
+		toast.success('Профиль успешно обновлён!');
 	};
 
 	return (

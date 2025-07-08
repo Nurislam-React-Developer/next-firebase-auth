@@ -15,7 +15,6 @@ export default function LoginPage() {
 		useGoogleLoginMutation();
 	const router = useRouter();
 
-	// Проверка авторизации
 	if (typeof window !== 'undefined' && Cookies.get('token')) {
 		router.replace('/');
 		return null;
@@ -23,8 +22,8 @@ export default function LoginPage() {
 
 	const validate = () => {
 		const newErrors = {};
-		if (!email) newErrors.email = 'Введите email';
-		if (!password) newErrors.password = 'Введите пароль';
+		if (!email) newErrors.email = 'Пожалуйста, введите email';
+		if (!password) newErrors.password = 'Пожалуйста, введите пароль';
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
 	};
@@ -36,10 +35,12 @@ export default function LoginPage() {
 			const res = await loginUser({ email, password }).unwrap();
 			Cookies.set('token', res.token, { expires: 7 });
 			Cookies.set('email', res.user.email, { expires: 7 });
-			toast.success('Вход успешен!');
+			toast.success('Вход выполнен успешно!');
 			router.push('/');
 		} catch (error) {
-			toast.error(error?.message || 'Ошибка входа');
+			toast.error(
+				error?.message || 'Ошибка входа. Проверьте данные и попробуйте ещё раз.'
+			);
 		}
 	};
 
@@ -48,10 +49,12 @@ export default function LoginPage() {
 			const res = await googleLogin().unwrap();
 			Cookies.set('token', res.token, { expires: 7 });
 			Cookies.set('email', res.user.email, { expires: 7 });
-			toast.success('Вход через Google успешен!');
+			toast.success('Вход через Google выполнен успешно!');
 			router.push('/');
 		} catch (error) {
-			toast.error(error?.message || 'Ошибка Google входа');
+			toast.error(
+				error?.message || 'Ошибка входа через Google. Попробуйте ещё раз.'
+			);
 		}
 	};
 

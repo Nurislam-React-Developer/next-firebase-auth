@@ -16,7 +16,7 @@ const getFakeJWT = async (user) => {
 export const authApi = createApi({
 	reducerPath: 'authApi',
 	baseQuery: async () => {
-		return { data: {} }; // baseQuery не нужен, так как мы делаем вызовы напрямую через firebase
+		return { data: {} }; 
 	},
 	endpoints: (builder) => ({
 		registerUser: builder.mutation({

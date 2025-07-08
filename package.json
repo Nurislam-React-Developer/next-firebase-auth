@@ -15,9 +15,11 @@
     "js-cookie": "^3.0.5",
     "next": "15.3.5",
     "react": "^19.0.0",
+    "react-console-emulator": "^5.0.2",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
+    "react-terminal-ui": "^1.4.0",
     "react-toastify": "^11.0.5"
   },
   "devDependencies": {

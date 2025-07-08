@@ -67,7 +67,6 @@ export default function HomePage() {
 		);
 	}
 
-	// Не авторизован — hero-блок
 	return (
 		<div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-blue-100 to-green-200'>
 			<div className='bg-white p-10 rounded-2xl shadow-2xl text-center max-w-2xl w-full animate-fade-in'>
