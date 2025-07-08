@@ -1,5 +1,5 @@
 // src/firebase/config.js
-import { initializeApp } from 'firebase/app';
+import { getApps, initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -11,7 +11,14 @@ const firebaseConfig = {
 	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+if (typeof window === 'undefined') {
+	throw new Error('Firebase должен использоваться только на клиенте');
+}
+
+let app;
+if (typeof window !== 'undefined' && !getApps().length) {
+	app = initializeApp(firebaseConfig);
+}
 
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
